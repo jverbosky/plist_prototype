@@ -1,0 +1,6 @@
+framework module Pods_plist_prototypeUITests {
+  umbrella header "Pods-plist_prototypeUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
