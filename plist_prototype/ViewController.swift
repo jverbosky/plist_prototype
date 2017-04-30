@@ -14,23 +14,33 @@ class ViewController: UIViewController {
     let dataPlistName = "Login"
     let usernameKey = "username"  // plist username key
     
+    @IBOutlet weak var inputField: UITextField!
+    @IBOutlet weak var statusUpdate: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Initialize plist if present, otherwise copy over plist into app's Documents directory
+        // Initialize plist if present, otherwise copy over Login.plist file into app's Documents directory
         SwiftyPlistManager.shared.start(plistNames: [dataPlistName], logging: false)
         
-        // Populate/update plist with username and password
-        evaluatePlist("jverbosky@iphone.com")
-        
-        // Collect plist values for username and password
-        readPlist(usernameKey)
-        
-        
+        // Output plist value for username
+        // readPlist(usernameKey)
         
     }
-
+    
+    // Function to collect username from input field
+    @IBAction func submitButton(_ sender: UIButton) {
+        
+        if inputField.text != "" {
+            evaluatePlist(inputField.text!)
+            statusUpdate.text = "Thank you \(inputField.text!)!"
+        } else {
+            statusUpdate.text = "Username not detected - please try again!"
+        }
+    }
+    
+    
     // Function to determine if plist is already populated
     func evaluatePlist(_ usernameValue:String) {
         
