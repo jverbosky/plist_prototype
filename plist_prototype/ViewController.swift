@@ -32,12 +32,27 @@ class ViewController: UIViewController {
         
     }
 
+    // Function to determine push notification enablement status
+    func checkPneStatus() {
+        let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
+        if notificationType == [] {
+            pneStatusValue = "0"
+            print("notifications are NOT enabled")
+        } else {
+            pneStatusValue = "1"
+            print("notifications are enabled")
+        }
+    }
+
+
     // Function to collect username from input field
     @IBAction func submitButton(_ sender: UIButton) {
         
         if inputField.text != "" {
             evaluatePlist(usernameKey, inputField.text!)
             statusUpdate.text = "Thank you \(inputField.text!)!"
+            checkPneStatus()
+            evaluatePlist(pneStatusKey, pneStatusValue)
         } else {
             statusUpdate.text = "Username not detected - please try again!"
         }
@@ -93,6 +108,10 @@ class ViewController: UIViewController {
 
     
     
+    
+    
+
+/* Backup for username-targeting functions */
 //    // Function to collect username from input field
 //    @IBAction func submitButton(_ sender: UIButton) {
 //        
